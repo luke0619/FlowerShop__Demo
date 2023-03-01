@@ -1,5 +1,4 @@
 dev-data/
-package.json
 node_modules/
 .prettierrc
 config.env
