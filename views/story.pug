@@ -1,0 +1,12 @@
+extends base
+
+block content
+    .Story
+        .Story__page
+            .Story__left
+                img.Story__img(src='assets/luke1.jpg' alt='作者圖片')
+                img.Story__img(src='assets/luke2.jpg' alt='作者圖片')
+            .Story__right
+                h2.Story__header= '品牌故事'
+                h3.Story__title= '此網站是孫立飛的履歷展示作品'
+                p.Story__content= '大家好，我是孫立飛，歡迎大家來到我的網站，這個網站具備基本的電商網站功能，使用者可以註冊會員、登入會員、虛擬購買網頁上的商品、更改使用者個人資料(名稱、帳號、密碼)、上傳個人大頭貼。後端的部分使用NODE.js開發的API，此API有連接到MongoDB資料庫，以進行資料庫的處理。前端的部分,是使用NODE.js提供的PUG template來提供模板,UI有使用到SASS來做預處理，並搭配CSS中grid及flex進行基本排版，網站整體而言遵循著響應式設計，希望來此參訪的大家會喜歡!'

@@ -1,0 +1,18 @@
+extends base
+
+block content
+    .login
+        .login--form
+            form.form--reset
+                h2.form__title= '重設您的帳號'
+                .form__group
+                    label.form__label(for='password')= '密碼'
+                    input#password.form__input(type='text' minlength='8' placeholder='請輸入至少八位數的密碼')
+
+                .form__group
+                    label.form__label(for='passwordConfirm')= '密碼'
+                    input#passwordConfirm.form__input(type='text' minlength='8' placeholder='請輸入至少八位數的密碼')
+                .form__group
+                    input#token.form__input(type='hidden' value=`${token}`)
+                .form__group
+                    button.btn= '重設'

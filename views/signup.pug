@@ -1,0 +1,24 @@
+extends base
+
+block content
+    .SignupPage 
+        .SignupPage__container
+            h1.Heading-primary-main= '註冊帳號'
+            form.SignupPage__form.Sign
+                .SignupPage__group
+                    label.SignupPage__label(for='name')= '使用者名稱'
+                    input#name.SignupPage__input(type='text' placeholder='user')
+                .SignupPage__group
+                    label.SignupPage__label(for='email')= '電子信箱'
+                    input#email.SignupPage__input(type='email' placeholder='user@example.com')               
+                .SignupPage__group
+                    label.SignupPage__label(for='address')= '住家地址'
+                    input#address.SignupPage__input(type='text')
+                .SignupPage__group 
+                    label.SignupPage__label(for='password')= '密碼'
+                    input#password.SignupPage__input(type='password' placeholder='********')               
+                .SignupPage__group
+                    label.SignupPage__label(for='password-confirm')= '第二次輸入密碼'
+                    input#passwordconfirm.SignupPage__input(type='password' placeholder='********')           
+                .SignupPage__group
+                    button.btn= '註冊'

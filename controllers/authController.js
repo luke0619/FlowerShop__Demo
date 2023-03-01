@@ -17,7 +17,7 @@ const createSendToken = (user, statusCode, req, res) => {
     //產生憑證
     const token = signToken(user._id);
 
-    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     // cookie 設置選項 存活時間:30天 瀏覽器限制cookie只能經由HTTP(S)來存取
     // 在cookie中設定key為jwt 值為token變數的 keypair 設定為cookie持續30天
@@ -25,6 +25,9 @@ const createSendToken = (user, statusCode, req, res) => {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
         httpOnly: true,
     });
+
+
+    user.password = undefined;
 
     res.status(statusCode).json({
         status: 'success',
@@ -67,9 +70,11 @@ exports.logout = (req, res) => {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
     });
+
+    res.clearCookie('jwt');
+
     res.status(200).json({
         status: 'success',
-        token: ''
     })
 };
 
@@ -81,14 +86,16 @@ exports.protect = catchAsync(async (req, res, next) => {
         req.headers.authorization.startsWith('Bearer')
     ) {
         token = req.headers.authorization.split(' ')[1];
-    } else if (req.cookies.jwt) {
+    } else if (req.cookies.jwt && req.cookies.jwt !== 'loggedout') {
         token = req.cookies.jwt;
     }
 
     if (!token) {
-        return next(
-            new AppError('You are not logged in! Please log in to get access.', 401)
-        );
+        // return next(
+        //     new AppError('You are not logged in! Please log in to get access.', 401)
+        // );
+
+        res.redirect(req.originalUrl);
     }
 
     // 2) Verification token
@@ -174,8 +181,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     // 3) 寄送resetToken 到 使用者的信箱
     try {
-        const resetURL = `${req.protocol}:://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`
-        await new Email(user, resetURL).sendPasswordReset();
+        const resetURL = `${req.protocol}:://${req.get('host')}/reset/${resetToken}`
+        const token = resetToken;
+        await new Email(user, resetURL, token).sendPasswordReset();
 
         res.status(200).json({
             status: "success",

@@ -40,7 +40,9 @@ exports.updateOne = Model => catchAsync(async (req, res, next) => {
         new: true,
         runValidators: true
     })
-    if (!doc) next(new AppError('更新此ID文件失敗', 404));
+    if (!doc) {
+        return next(new AppError('No document found with that ID', 404));
+    }
 
     res.status(200).json({
         status: 'success',

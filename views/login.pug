@@ -1,0 +1,33 @@
+extends base
+
+block content
+  .login
+    .login--form
+      form.form--login
+        h2.form__title= '登入您的帳號'
+        .form__group
+          label.form__label(for='email')= '電子信箱'
+          input#email.form__input(type='email' placeholder="user@gmail.com")
+        .form__group
+          label.form__label(for='password')= '密碼'
+          input#password.form__input(type='text' minlength='8' placeholder='請輸入至少八位數的密碼')
+        .form__group
+          button.btn= '登入'
+          a.btn.forgot-btn(href='/forgotpassword')= '忘記密碼'
+
+
+
+
+
+
+  //- main.main
+  //-     h2 Log into your account
+  //-     form.form.form--login
+  //-       .form__group
+  //-         label(for='email') Email address
+  //-         input#email(type='email', placeholder='username@gmail.com', required)
+  //-       .form__group.ma-bt-md
+  //-         label(for='password') Password
+  //-         input#password(type='password', placeholder='••••••••', required, minlength='8')
+  //-       .form__group
+  //-         button.btn.btn--green Login

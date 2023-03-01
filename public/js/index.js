@@ -1,9 +1,12 @@
 /* eslint-disable */
 import '@babel/polyfill';
-import { displayMap } from './mapbox.js';
+// import { displayMap } from './mapbox.js';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
-import { bookTour } from './stripe';
+import { bookProduct } from './stripe';
+import { signup } from './signup';
+import { forgot } from './forgot';
+import { reset } from './reset';
 
 // DOM ELEMENTS
 // const mapBox = document.getElementById('map');
@@ -11,7 +14,10 @@ const loginForm = document.querySelector('.form--login');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data')
 const userPasswordForm = document.querySelector('.form-user-password')
-const bookBtn = document.getElementById('book-tour');
+const bookBtn = document.getElementById('book-product');
+const signupForm = document.querySelector('.Sign');
+const forgotForm = document.querySelector('.forgot-form');
+const resetForm = document.querySelector('.form--reset');
 
 // DELEGATION
 
@@ -19,6 +25,46 @@ const bookBtn = document.getElementById('book-tour');
 //     const locations = JSON.parse(mapbox.dataset.locations);
 //     displayMap(locations);
 // }
+
+if (resetForm) {
+    resetForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+        const token = document.getElementById('token').value;
+
+        reset(password, passwordConfirm, token);
+    })
+}
+
+if (forgotForm) {
+    forgotForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+
+        forgot(email);
+    })
+}
+
+if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordconfirm').value;
+        const data = {
+            name,
+            email,
+            address,
+            password,
+            passwordConfirm
+        };
+        signup(data);
+    });
+};
+
 if (loginForm) {
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
@@ -53,7 +99,7 @@ if (userPasswordForm) {
         const passwordConfirm = document.getElementById('password-confirm').value;
         await updateSettings({ passwordCurrent, password, passwordConfirm }, 'password');
 
-        document.querySelector('.btn--save-password').textContent = 'Save password';
+        document.querySelector('.btn--save-password').textContent = '儲存密碼';
         document.getElementById('password-current').value = '';
         document.getElementById('password').value = '';
         document.getElementById('password-confirm').value = '';
@@ -63,7 +109,7 @@ if (userPasswordForm) {
 if (bookBtn) {
     bookBtn.addEventListener('click', e => {
         e.target.textContent = 'Processing...'
-        const { tourId } = e.target.dataset;
-        bookTour(tourId);
+        const { productId } = e.target.dataset;
+        bookProduct(productId);
     })
 }

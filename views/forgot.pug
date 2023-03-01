@@ -1,0 +1,12 @@
+extends base
+
+block content
+  .login
+    .login--form
+        form.forgot-form
+            h2.form__title= '找回您的密碼'
+            .form__group
+            label.form__label(for='email')= '電子信箱'
+            input#email.form__input(type='email' placeholder="user@gmail.com")
+            .form__group
+            button.btn= '繳交'

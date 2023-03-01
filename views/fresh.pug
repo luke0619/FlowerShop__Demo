@@ -1,0 +1,12 @@
+extends base
+
+block content
+    .SpecialPage__container
+        .SpecialPage
+            each product in products
+                .SpecialPage__card
+                    img.SpecialPage__img(src=`/assets/${product.imageCover}`)
+                    .SpecialPage__body
+                        h5.SpecialPage__title= `${product.chineseName}`
+                        p= `NT$${product.price}`
+                        a.btn--green.SpecialPage__detail(href=`/product/${product.name}`)= '產品詳細'

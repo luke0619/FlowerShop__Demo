@@ -1,0 +1,58 @@
+extends base
+
+block content
+    .user-block
+        .user-view
+            nav.user-view__menu
+                ul.user-view__side-nav
+                    li.user-view__link-item
+                        a.user-view__link(href='/')
+                            svg.w-5(viewBox='0 0 24 24' xmln='http://www.w3.org/2000/svg')
+                                g(fill='#FFFFFF')
+                                    path(d='M16.14 12.33C17.28 11.24 18 9.71 18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 1.71.72 3.24 1.86 4.33C3.52 13.05 0 14.94 0 18c0 4 1 4 12 4s12 0 12-4c0-3.06-3.52-4.95-7.86-5.67z')
+                            p= '個人資料'
+
+                    li.user-view__link-item
+                        a.user-view__link(href='/')
+                            svg.w-5(viewBox='0 0 24 24' xmln='http://www.w3.org/2000/svg')
+                                g(fill='#FFFFFF')
+                                    path(d='M20 7h-5V5.5c0-.8-.7-1.5-1.5-1.5h-3C9.7 4 9 4.7 9 5.5V7H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h1v1h3v-1h8v1h3v-1h1c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM7 18H6V8h1v10zm7-11h-4V5.5c0-.3.2-.5.5-.5h3c.3 0 .5.2.5.5V7zm4 11h-1V8h1v10z')
+                            p= '我的訂單'
+            
+            .user-view__content
+                .user-view__form-container
+                    p.uer-view__title= '您的帳號設定'
+                    
+                    form.form.form-user-data
+                        .form__group
+                            label.form__label(for='name')= '名稱'
+                            input#name.form__input(type='text' required name='name' value=`${user.name}`)
+                        .form__group
+                            label.form__label(for='email')= '電子信箱'
+                            input#email.form__input(type='text' required name='email' value=`${user.email}`)
+                        .form__group.form__photo-upload
+                            img.form__user-photo(src=`/img/users/${user.photo}` alt='使用者大頭貼')
+                            input#photo.form__upload(type='file' name='photo')
+                            label(for='photo')= '選擇大頭貼'
+                        .form__group--submit
+                            button.form__submit= "儲存設定"
+
+                .line &nbsp;
+
+                .user-view__form-container
+                    p.user-view__title= '密碼設定'
+                    
+                    form.form.form-user-password
+                        .form__group
+                            label.form__label(for='password-current')= '現在密碼'
+                            input#password-current.form__input(type='password' required minLength='8' placeholder='********')
+                        .form__group
+                            label.form__label(for='password')= '新密碼'
+                            input#password.form__input(type='password' required minLength='8' placeholder='********')
+                        .form__group
+                            label.form__label(for='password-confirm')= '輸入第二次新密碼'
+                            input#password-confirm.form__input(type='password' required minLength='8' placeholder='********')
+                        .form__group--submit
+                            button.form__submit.btn--save-password= '儲存密碼'
+
+

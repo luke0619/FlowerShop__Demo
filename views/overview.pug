@@ -1,0 +1,33 @@
+extends base
+
+block content
+    .HeroImage
+        .HeroImage__PrimaryTitle
+            p= '路克網路花店'
+        .HeroImage__SubTitle 
+            p= '為生活傳達情意'
+
+    h1.Heading-primary-main= '新品上市'
+    .NewArrival
+        each product in products
+            .NewArrival__item
+                img.NewArrival__photo(src=`assets/${product.imageCover}`)
+                p= `${product.name}`
+                p= `NT$ ${product.price}`
+                a.btn-detail.btn--green(href=`/product/${product.name}`)= '詳細'
+
+    h1.Heading-primary-main= '熱賣商品'
+    .BestSeller
+        .BestSeller__item
+            a.BestSeller__link(href='/dried')
+                img.BestSeller__img(src='assets/dried.jpg' alt='乾燥花圖片')
+                h1.BestSeller__title= '乾燥花專區'
+        .BestSeller__item
+            a.BestSeller__link(href='/fresh')
+                img.BestSeller__img(src='assets/plant1.jpg' alt='鮮花圖片')
+                h1.BestSeller__title= '鮮花專區'
+        .BestSeller__item
+            a.BestSeller__link(href='/orchid')
+                img.BestSeller__img(src='assets/orchid.jpg' alt='蘭花圖片')
+                h1.BestSeller__title= '蘭花專區'
+

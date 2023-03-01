@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const bookingRouter = require('./routes/bookingRoute');
-
+const viewRouter = require('./routes/viewRoute');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -24,7 +24,37 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 設定 安全的Http標頭
-app.use(helmet());
+const scriptSrcUrls = [
+    'https://api.tiles.mapbox.com/',
+    'https://api.mapbox.com/',
+];
+const styleSrcUrls = [
+    'https://api.mapbox.com/',
+    'https://api.tiles.mapbox.com/',
+    'https://fonts.googleapis.com/',
+];
+const connectSrcUrls = [
+    'https://api.mapbox.com/',
+    'https://a.tiles.mapbox.com/',
+    'https://b.tiles.mapbox.com/',
+    'https://events.mapbox.com/',
+];
+const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", 'blob:'],
+            objectSrc: [],
+            imgSrc: ["'self'", 'blob:', 'data:'],
+            fontSrc: ["'self'", ...fontSrcUrls],
+        },
+    })
+);
+
 app.use(cors());
 
 if (process.env.NODE_ENV === 'development') {
@@ -50,6 +80,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/', viewRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/bookings', bookingRouter);

@@ -40,6 +40,9 @@ const userSchema = new mongoose.Schema({
             message: '第二組密碼與第一組密碼不一致'
         }
     },
+    address: {
+        type: String,
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,

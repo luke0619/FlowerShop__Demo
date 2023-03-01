@@ -1,0 +1,15 @@
+extends base
+
+block content
+    .ProductPage
+        .ProductPage__item
+            img(src=`/assets/${product.imageCover}` alt='產品圖片')
+        .ProductPage__content
+            h2.ProductPage__content__title= `${product.name}`
+            p.ProductPage__content__price= `NT$ ${product.price}`
+            if user
+                button#book-product.btn--green.btn-small.ProductPage__content__buy(data-product-id=`${product.id}`) 馬上購買
+            else
+                a.btn--green.btn-small.ProductPage__content__buy.center(href=`/login`) 登入後購買
+            p.ProductPage__content__describe= '產品描述'
+            p.ProductPage__description= `${product.description}`

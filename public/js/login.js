@@ -3,8 +3,6 @@ import axios from 'axios';
 import { showAlert } from './alerts';
 
 export const login = async (email, password) => {
-  // console.log(email, password);
-
   try {
     const res = await axios({
       method: 'POST',
@@ -16,12 +14,13 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Logged in successfully');
+      showAlert('success', '登入成功(載入使用者頁面中...)');
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);
     }
   } catch (err) {
+    console.log('登入失敗')
     showAlert('error', err.response.data.message);
   }
 };
@@ -33,8 +32,9 @@ export const logout = async () => {
       url: '/api/v1/users/logout',
     });
     if (res.data.status = 'success') location.reload(true);
+
   } catch (err) {
-    showAlert('error', 'Error logging out! Try again.')
+    showAlert('error', '登出失敗，請稍後重試')
   }
 }
 
