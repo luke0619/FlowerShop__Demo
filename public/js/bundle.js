@@ -12007,14 +12007,13 @@ var login = /*#__PURE__*/function () {
               location.assign('/');
             }, 1500);
           }
-          _context.next = 11;
+          _context.next = 10;
           break;
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          console.log('登入失敗');
           (0, _alerts.showAlert)('error', _context.t0.response.data.message);
-        case 11:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -12653,7 +12652,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52781" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54805" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

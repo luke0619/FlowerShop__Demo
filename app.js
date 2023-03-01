@@ -10,6 +10,7 @@ const productRouter = require('./routes/productRoutes');
 const userRouter = require('./routes/userRoutes');
 const bookingRouter = require('./routes/bookingRoute');
 const viewRouter = require('./routes/viewRoute');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -72,7 +73,7 @@ app.use(mongoSanitize());
 // Data sanitization againse XSS
 app.use(xss());
 
-// 預防參數汙染
+app.use(compression());
 
 // 測試中介軟體
 app.use((req, res, next) => {
